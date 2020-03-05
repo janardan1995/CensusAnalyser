@@ -5,11 +5,17 @@
 // <creator name="Janardan Das"/>
 // --------------------------------------------------------------------------------------------------------------------
 
-
 namespace CensusAnalyserLibrary
 { 
     using System.Collections.Generic;
     using System.IO;
+
+    /// <summary>
+    /// Delegate 
+    /// </summary>
+    /// <param name="FilePath"></param>
+    /// <returns></returns>
+    public delegate object LoadDataDelegate(string FilePath, char delimiter = ',');
 
     /// <summary>
     /// This is CSVStateCensus class

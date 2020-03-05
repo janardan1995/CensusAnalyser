@@ -17,15 +17,18 @@ namespace NUnitTestProject1
     {
         string CorrectFilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CSV";
         string FilePath2 = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeader.csv";
+        string IncorrectFilePath = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
+        string ErrorTypeFilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt";
         /// <summary>
         /// test case 1.1
         ///Given the States Census CSV file, Check to ensure the Number of Record matches
         /// </summary>
         [Test]
         public void GivenCSVFilePathProper_whenAnalyse_ItMatchesTheRecord()
-        { 
-            
-            object Iteratoritems = CSVStates.CSVDataUsingIEnumerator(CorrectFilePath);
+        {
+
+            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
+            object Iteratoritems = loadData(CorrectFilePath);
             object[] myitems = StateCensusAnalyser.StateCensusCSVData();
             int item = (int)myitems.Length;
             Assert.AreEqual(item, Iteratoritems);
@@ -38,8 +41,8 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
-            var FilePath = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
-            string actual = (string)CSVStates.CSVDataUsingIEnumerator(FilePath);
+            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
+            object actual = loadData(IncorrectFilePath);
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -51,8 +54,8 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CS";
-            var actual = Assert.Throws<CensusAnalyseException>(()=>CSVStates.CSVDataUsingIEnumerator(FilePath));
+            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
+            var actual = Assert.Throws<CensusAnalyseException>(() => loadData(ErrorTypeFilePath));
             var expected = MyEnum.INCORRECT_TYPE.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -63,8 +66,9 @@ namespace NUnitTestProject1
         /// </summary>
         [Test]
         public void GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
-        {            
-            string actual = (string)CSVStates.CSVDataUsingIEnumerator(CorrectFilePath, '/');
+        {
+            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
+            string actual = (string)loadData(CorrectFilePath, '/');
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -75,10 +79,11 @@ namespace NUnitTestProject1
         /// </summary>
         [Test]
         public void GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
-        {       
-            string actual = (string)CSVStates.CSVDataUsingIEnumerator(FilePath2);
+        {
+            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
+            string actual = (string)loadData(FilePath2);
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
             Assert.AreEqual(actual, expected);
-        }        
+        }
     }
 }
