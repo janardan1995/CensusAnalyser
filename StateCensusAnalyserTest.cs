@@ -11,6 +11,7 @@ namespace NUnitTestProject1
     using CensusAnalyserLibrary;
     using System.IO;
     using System.Collections.Generic;
+    using System;
 
     /// <summary>
     /// This is CensusAnalyser Test class
@@ -24,9 +25,21 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePathProper_whenAnalyse_ItMatchesTheRecord()
         {
-            IEnumerable<string> Iteratoritems = CSVStateCensus.CSVDataUsingIEnumerator();
-            string[] myitems = StateCensusAnalyser.StateCensusCSVData();          
-            Assert.AreEqual(myitems,Iteratoritems) ;
+            object Iteratoritems = CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv");
+            object[] myitems = StateCensusAnalyser.StateCensusCSVData();
+            int item = (int)myitems.Length;
+            Assert.AreEqual(item,Iteratoritems) ;
         }
+
+        /// <summary>
+        /// test case 1.2
+        ///Given the State Census CSV File if incorrect Returns a custom Exception
+        /// </summary>
+        [Test]
+        public void GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
+        {
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCnsusData.csv");
+            Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
+        }   
     }
 }

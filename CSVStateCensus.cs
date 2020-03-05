@@ -22,14 +22,36 @@ namespace CensusAnalyserLibrary
         /// In this method i am using Ienumerable
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public static IEnumerable<string> CSVDataUsingIEnumerator()
+        public static object CSVDataUsingIEnumerator(string FilePath)
         {
-            string[] lines = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv");
-            foreach(var line in lines)
+            try
             {
-                yield return line;
+                if(FilePath!= @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv")
+                {
+                    throw new CensusAnalyseException("file not found");
+                }
+                List<string> myList = new List<string>();
+           
+                string[] Lines = File.ReadAllLines(FilePath);
+           
+                foreach (var line in Lines)
+                {
+                    myList.Add(line);
+                }
+                int count = 0;
+                IEnumerable<string> iterator = myList;
+                foreach(var item in iterator)
+                {
+                    count++;
+                }
+
+                return count;
+            }
+            catch (CensusAnalyseException ex)
+            {
+                return ex.Message;
             }
         }
-
     }
 }
+
