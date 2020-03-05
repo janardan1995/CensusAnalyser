@@ -40,6 +40,17 @@ namespace NUnitTestProject1
         {
             string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCnsusData.csv");
             Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
+        }
+
+        /// <summary>
+        /// test case 1.3
+        ///Given the State Census CSV File when correct but type incorrect Returns a custom Exception
+        /// </summary>
+        [Test]
+        public void GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
+        {
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt");
+            Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
         }   
     }
 }

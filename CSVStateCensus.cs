@@ -28,7 +28,7 @@ namespace CensusAnalyserLibrary
             {
                 if(FilePath!= @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv")
                 {
-                    throw new CensusAnalyseException("file not found");
+                    throw new CensusAnalyseException("ERROR_IN_FILE_READING");
                 }
                 List<string> myList = new List<string>();
            
