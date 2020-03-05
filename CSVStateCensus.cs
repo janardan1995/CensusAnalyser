@@ -31,7 +31,11 @@ namespace CensusAnalyserLibrary
                 
                 ////This line reads the CSV file and store it into the strings of array
                 string[] Lines = File.ReadAllLines(FilePath);
-                
+                if(Lines[0]!= "State,Population,AreaInSqKm,DensityPerSqKm")
+                {
+                    throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
+                }
+
                 ////create a list to store the data in the file
                 List<string> myList = new List<string>();           
                              

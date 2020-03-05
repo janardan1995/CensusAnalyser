@@ -25,7 +25,8 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePathProper_whenAnalyse_ItMatchesTheRecord()
         {
-            object Iteratoritems = CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv");
+            var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
+            object Iteratoritems = CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
             object[] myitems = StateCensusAnalyser.StateCensusCSVData();
             int item = (int)myitems.Length;
             Assert.AreEqual(item,Iteratoritems) ;
@@ -38,7 +39,8 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
-            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCnsusData.csv");
+            var FilePath = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
             Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
         }
 
@@ -49,19 +51,33 @@ namespace NUnitTestProject1
         [Test]
         public void GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt");
+            var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt";
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
             Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
-        } 
-        
+        }
+
         /// <summary>
-        /// test case 1.3
-        ///Given the State Census CSV File when correct but type incorrect Returns a custom Exception
+        /// test case 1.4
+        ///Given the State Census CSV File when correct but delimiter incorrect Returns a custom Exception
         /// </summary>
         [Test]
-        public void Giv11enCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
+        public void GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv", '.');
+            var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath, '.');
             Assert.AreEqual(actual, "Invalide_Delimeter");
+        }
+
+        /// <summary>
+        /// test case 1.5
+        ///Given the State Census CSV File when correct but csv header incorrect Returns a custom Exception
+        /// </summary>
+        [Test]
+        public void GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
+        {
+            var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeader.csv";
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath, ',');
+            Assert.AreEqual(actual, "HEADER_IS_NOT_FOUND");
         }   
     }
 }
