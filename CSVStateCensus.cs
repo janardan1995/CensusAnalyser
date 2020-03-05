@@ -22,7 +22,7 @@ namespace CensusAnalyserLibrary
         /// In this method i am using Ienumerable
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public static object CSVDataUsingIEnumerator(string FilePath, char delimeter=',')
+        public static object CSVDataUsingIEnumerator(string FilePath, char delimiter=',')
         {            
             try
             {               
@@ -34,27 +34,22 @@ namespace CensusAnalyserLibrary
                 if(Lines[0]!= "State,Population,AreaInSqKm,DensityPerSqKm")
                 {
                     throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
-                }
-
-                ////create a list to store the data in the file
-                List<string> myList = new List<string>();           
+                }                   
                              
            
-                foreach (var line in Lines)
-                {
-                    ////to add the data in the list that hve created in the above
-                    myList.Add(line);
+                foreach (var line in File.ReadLines(FilePath))
+                {                  
                    
                     ////For delimeter
-                    string[] LineCount= line.Split(delimeter);
-                    if (LineCount.Length !=4 && LineCount.Length !=2)
-                        throw new CensusAnalyseException("Invalide_Delimeter");                                      
+                    string[] LineCount= line.Split(delimiter);
+                    if (LineCount.Length !=4 && LineCount.Length!=2)
+                        throw new CensusAnalyseException("INVALID_DELIMITER");                                      
                 }
 
                 int count = 0;
 
                 ////store the list into iterator(IEnumerable)
-                IEnumerable<string> iterator = myList;
+                IEnumerable<string> iterator = Lines;
                 foreach(var item in iterator)
                     count++;              
 

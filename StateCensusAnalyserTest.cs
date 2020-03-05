@@ -8,7 +8,7 @@
 namespace NUnitTestProject1
 {
     using NUnit.Framework;
-    using CensusAnalyserLibrary;
+    using CensusAnalyserLibrary;    
     using System.IO;
     using System.Collections.Generic;
     using System;
@@ -41,7 +41,8 @@ namespace NUnitTestProject1
         {
             var FilePath = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
             string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
-            Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
+            var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
+            Assert.AreEqual(actual, expected);
         }
 
         /// <summary>
@@ -53,7 +54,8 @@ namespace NUnitTestProject1
         {
             var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt";
             string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
-            Assert.AreEqual(actual, "ERROR_IN_FILE_READING");
+            var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
+            Assert.AreEqual(actual, expected);
         }
 
         /// <summary>
@@ -65,7 +67,8 @@ namespace NUnitTestProject1
         {
             var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
             string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath, '.');
-            Assert.AreEqual(actual, "Invalide_Delimeter");
+            var expected = MyEnum.INVALID_DELIMITER.ToString();
+            Assert.AreEqual(actual,expected);
         }
 
         /// <summary>
@@ -76,8 +79,9 @@ namespace NUnitTestProject1
         public void GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
             var FilePath = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeader.csv";
-            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath, ',');
-            Assert.AreEqual(actual, "HEADER_IS_NOT_FOUND");
+            string actual = (string)CSVStateCensus.CSVDataUsingIEnumerator(FilePath);
+            var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
+            Assert.AreEqual(actual, expected);
         }   
     }
 }

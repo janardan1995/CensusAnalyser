@@ -8,7 +8,13 @@
 namespace CensusAnalyserLibrary
 {
     using System;
-   
+   public enum MyEnum
+    {
+        ERROR_IN_FILE_READING,
+        HEADER_IS_NOT_FOUND,
+        INVALID_DELIMITER
+
+    }
     /// <summary>
     /// MyCustomException class for CensusAnalyser
     /// </summary>
