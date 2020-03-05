@@ -8,17 +8,22 @@
 namespace CensusAnalyserLibrary
 {
     using System;
-   public enum MyEnum
+
+    /// <summary>
+    /// my enum class
+    /// </summary>
+    public enum MyEnum
     {
         ERROR_IN_FILE_READING,
         HEADER_IS_NOT_FOUND,
-        INVALID_DELIMITER
-
+        INVALID_DELIMITER,
+        INCORRECT_TYPE
     }
+
     /// <summary>
     /// MyCustomException class for CensusAnalyser
     /// </summary>
-    public class CensusAnalyseException :Exception
+    public class CensusAnalyseException : Exception
     {
         /// <summary>
         /// constructor create which has a parameter like its parent class Exception
@@ -26,6 +31,6 @@ namespace CensusAnalyserLibrary
         /// <param name="message"></param>
         public CensusAnalyseException(string message) : base(message)
         {
-        }      
+        }
     }
 }
