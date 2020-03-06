@@ -1,5 +1,5 @@
 ﻿// --------------------------------------------------------------------------------------------------------------------
-// <copyright file="CSVState.cs" company="Bridgelabz">
+// <copyright file="CSVStateCensus.cs" company="Bridgelabz">
 //   Copyright © 2020 Company="BridgeLabz"
 // </copyright>
 // <creator name="Janardan Das"/>
@@ -15,12 +15,12 @@ namespace CensusAnalyserLibrary
     /// </summary>
     /// <param name="FilePath"></param>
     /// <returns></returns>
-    public delegate object LoadDataDelegate2(string FilePath, char delimiter = ',');
+    public delegate object LoadDataDelegate(string FilePath, char delimiter = ',');
 
     /// <summary>
     /// This is CSVStateCensus class
     /// </summary>
-    public class CSVStates
+    public class CSVStatescensus
     {
         /// <summary>
         /// In this method i am using Ienumerable
@@ -39,14 +39,14 @@ namespace CensusAnalyserLibrary
 
                 ////This line reads the CSV file and store it into the strings of array
                 string[] Lines = File.ReadAllLines(FilePath);
-                if (Lines[0] != "SrNo,State,Name,TIN,StateCode,")
+                if (Lines[0] != "State,Population,AreaInSqKm,DensityPerSqKm")
                     throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
 
                 foreach (var line in File.ReadLines(FilePath))
                 {
                     ////For delimeter
                     string[] LineCount = line.Split(delimiter);
-                    if (LineCount.Length != 4 && LineCount.Length != 6)
+                    if (LineCount.Length != 4 && LineCount.Length != 2)
                         throw new CensusAnalyseException("INVALID_DELIMITER");
                 }
 
