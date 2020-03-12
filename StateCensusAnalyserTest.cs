@@ -16,15 +16,31 @@ namespace NUnitTestProject1
     /// </summary>
     public class CenserAnalyserTests
     {
+        /// <summary>
+        /// FOR USECASE 1
+        /// </summary>
         string CorrectFilePath_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CSV";
         string FilePath_EmptyHeader_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeader.csv";
         string IncorrectFilePath_Usecase1 = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
         string ErrorTypeFilePath_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt";
 
+        /// <summary>
+        /// FOR USECASE 2
+        /// </summary>
         string CorrectFilePath_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.CSV";
         string FilePath_EmptyHeader_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeaderForStateCode.csv";
         string IncorrectFilePath_Usecase2 = @"Users\Bridge Labz\Desktop\censusdata\StateCode.csv";
         string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.txt";
+
+        /// <summary>
+        /// creating instance of factory class
+        /// </summary>
+        CSVFactory ff = new CSVFactory();
+
+        /// <summary>
+        /// creating instance of builder class
+        /// </summary>
+        CSVBuilder bb = new CSVBuilder();
 
         /// <summary>
         /// test case 1.1
@@ -33,11 +49,12 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase1_GivenCSVFilePathProper_whenAnalyse_ItMatchesTheRecord()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStatescensus.CSVDataUsingIEnumerator);
-            object Iteratoritems = loadData(CorrectFilePath_Usecase1);
-            object[] myitems = StateCensusAnalyser.StateCensusCSVData();
+            StateCensusAnalyser obj = new StateCensusAnalyser();
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            var obj1 = delegateCSV(ff.createInstance("CSVStatescensus"), CorrectFilePath_Usecase1);
+            object[] myitems = obj.StateCensusCSVData();
             int item = (int)myitems.Length;
-            Assert.AreEqual(item, Iteratoritems);
+            Assert.AreEqual(item, obj1);
         }
 
         /// <summary>
@@ -47,8 +64,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase1_GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStatescensus.CSVDataUsingIEnumerator);
-            object actual = loadData(IncorrectFilePath_Usecase1);
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            object actual = delegateCSV(ff.createInstance("CSVStatescensus"), IncorrectFilePath_Usecase1);
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -60,8 +77,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase1_GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStatescensus.CSVDataUsingIEnumerator);
-            var actual = Assert.Throws<CensusAnalyseException>(() => loadData(ErrorTypeFilePath_Usecase1));
+
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStatescensus"), ErrorTypeFilePath_Usecase1));
             var expected = MyEnum.INCORRECT_TYPE.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -73,8 +91,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase1_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStatescensus.CSVDataUsingIEnumerator);
-            string actual = (string)loadData(CorrectFilePath_Usecase1, '.');
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            string actual = (string)delegateCSV(ff.createInstance("CSVStatescensus"), CorrectFilePath_Usecase1, '.');
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -86,8 +104,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase1_GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStatescensus.CSVDataUsingIEnumerator);
-            string actual = (string)loadData(FilePath_EmptyHeader_Usecase1);
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            string actual = (string)delegateCSV(ff.createInstance("CSVStatescensus"), FilePath_EmptyHeader_Usecase1);
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -99,8 +117,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase2_GivenCSVFilePathProper_whenAnalyse_ItMatchesTheRecord()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
-            object Iteratoritems = loadData(CorrectFilePath_Usecase2);
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            object Iteratoritems = delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2);
             string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.csv");
             int item = (int)myitems.Length;
             Assert.AreEqual(item, Iteratoritems);
@@ -113,8 +131,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase2_GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
-            object actual = loadData(IncorrectFilePath_Usecase2);
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            object actual = delegateCSV(ff.createInstance("CSVStates"), IncorrectFilePath_Usecase2);
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -126,8 +144,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase2_GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
-            var actual = Assert.Throws<CensusAnalyseException>(() => loadData(ErrorTypeFilePath_Usecase2));
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), ErrorTypeFilePath_Usecase2));          
             var expected = MyEnum.INCORRECT_TYPE.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -139,8 +157,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase2_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
-            string actual = (string)loadData(CorrectFilePath_Usecase2, '.');
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            string actual = (string)delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '.');            
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual, expected);
         }
@@ -152,8 +170,8 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase2_GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
-            LoadDataDelegate loadData = new LoadDataDelegate(CSVStates.CSVDataUsingIEnumerator);
-            string actual = (string)loadData(FilePath_EmptyHeader_Usecase2);
+            DelegateCSVDirector delegateCSV = bb.CSVDirector;
+            string actual = (string)delegateCSV(ff.createInstance("CSVStates"), FilePath_EmptyHeader_Usecase2);           
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
             Assert.AreEqual(actual, expected);
         }

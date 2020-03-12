@@ -8,25 +8,18 @@
 namespace CensusAnalyserLibrary
 {
     using System.Collections.Generic;
-    using System.IO;
-
-    /// <summary>
-    /// Delegate 
-    /// </summary>
-    /// <param name="FilePath"></param>
-    /// <returns></returns>
-    public delegate object LoadDataDelegate2(string FilePath, char delimiter = ',');
+    using System.IO;   
 
     /// <summary>
     /// This is CSVStateCensus class
-    /// </summary>
-    public class CSVStates
+    /// </summary>   
+    public class CSVStates : ICSVStatecensus
     {
         /// <summary>
         /// In this method i am using Ienumerable
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public static object CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
+        public object CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
         {
             FileInfo fileInfo = new FileInfo(FilePath);
             string type = fileInfo.Extension;

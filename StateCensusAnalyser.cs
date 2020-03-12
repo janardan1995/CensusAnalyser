@@ -19,7 +19,7 @@ namespace CensusAnalyserLibrary
         /// this methods read the csv file and return as a array of strings
         /// </summary>
         /// <returns>This class returns string value</returns>
-        public static string[] StateCensusCSVData()
+        public string[] StateCensusCSVData()
         {
             string[] lines = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv");
             return lines;
