@@ -19,14 +19,13 @@ namespace CensusAnalyserLibrary
         /// In this method i am using Ienumerable
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public object CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
+        public int CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
         {
             FileInfo fileInfo = new FileInfo(FilePath);
             string type = fileInfo.Extension;
             if (type != ".CSV" && type != ".csv")
                 throw new CensusAnalyseException("INCORRECT_TYPE");
-            try
-            {
+            
                 if (!File.Exists(FilePath))
                     throw new CensusAnalyseException("ERROR_IN_FILE_READING");
 
@@ -49,11 +48,8 @@ namespace CensusAnalyserLibrary
                 foreach (var item in iterator)
                     count++;
                 return count;
-            }
-            catch (CensusAnalyseException ex)
-            {
-                return ex.Message;
-            }
+            
+           
         }
     }
 }

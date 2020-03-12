@@ -12,6 +12,6 @@ namespace CensusAnalyserLibrary
     /// </summary>
     public interface ICSVStatecensus
     {
-     object CSVDataUsingIEnumerator(string FilePath, char delimiter = ',');
+     int CSVDataUsingIEnumerator(string FilePath, char delimiter = ',');
     }   
 }

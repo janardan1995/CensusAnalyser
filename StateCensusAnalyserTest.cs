@@ -65,9 +65,9 @@ namespace NUnitTestProject1
         public void UseCase1_GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            object actual = delegateCSV(ff.createInstance("CSVStatescensus"), IncorrectFilePath_Usecase1);
+            var actual = Assert.Throws<CensusAnalyseException>(()=>delegateCSV(ff.createInstance("CSVStatescensus"), IncorrectFilePath_Usecase1));
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
@@ -92,9 +92,9 @@ namespace NUnitTestProject1
         public void UseCase1_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            string actual = (string)delegateCSV(ff.createInstance("CSVStatescensus"), CorrectFilePath_Usecase1, '.');
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStatescensus"), CorrectFilePath_Usecase1, '.'));
             var expected = MyEnum.INVALID_DELIMITER.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
@@ -105,9 +105,9 @@ namespace NUnitTestProject1
         public void UseCase1_GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            string actual = (string)delegateCSV(ff.createInstance("CSVStatescensus"), FilePath_EmptyHeader_Usecase1);
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStatescensus"), FilePath_EmptyHeader_Usecase1));
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
@@ -132,9 +132,9 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            object actual = delegateCSV(ff.createInstance("CSVStates"), IncorrectFilePath_Usecase2);
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), IncorrectFilePath_Usecase2));
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
@@ -158,9 +158,9 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            string actual = (string)delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '.');            
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '.'));            
             var expected = MyEnum.INVALID_DELIMITER.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
 
         /// <summary>
@@ -171,9 +171,9 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            string actual = (string)delegateCSV(ff.createInstance("CSVStates"), FilePath_EmptyHeader_Usecase2);           
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), FilePath_EmptyHeader_Usecase2));           
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
-            Assert.AreEqual(actual, expected);
+            Assert.AreEqual(actual.Message, expected);
         }
     }
 }
