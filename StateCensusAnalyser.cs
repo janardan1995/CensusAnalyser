@@ -8,7 +8,7 @@
 namespace CensusAnalyserLibrary
 {
     using System;
-    using System.IO; 
+    using System.IO;
 
     /// <summary>
     /// This is state census Analyser class
@@ -22,20 +22,19 @@ namespace CensusAnalyserLibrary
         public static string StateCensus()
         {
             string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
-
-            for (int i = 0; i < line.Length; i++)
-            {
-                Console.WriteLine(line[i]);
-            }
             Utility.Sorted(line);
             var str = Utility.ConvertCsvFileToJsonObject(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusDataSortedForm.csv");
             return str;
-            
-            
-            //File.WriteAllText(@"C:\Users\Bridge Labz\Desktop\censusdata\xx.json", str);
         }
 
-    }
+        public static string StateCode()
+        {
+            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
 
+            var sortedData=Utility.sort(line);
+            var str = Utility.ConvertCsvFileToJsonObject(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodeSortedForm.csv");
+            return str;
+        }
+    }
 }
 

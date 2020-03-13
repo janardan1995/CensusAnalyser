@@ -213,5 +213,22 @@ namespace NUnitTestProject1
             var Expected = "West Bengal";
             Assert.AreEqual(actual, Expected);
         }
+
+
+        /// <summary>
+        /// UseCase 4
+        /// TestCase 4.1
+        /// Convert the csv file to json 
+        /// here json file should matched the sorted order start state in csv file
+        /// </summary>
+        [Test]
+        public void UseCase4_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
+        {
+            var json = StateCensusAnalyser.StateCode();
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[0]["State"].ToString();
+            var Expected = "Andhra Pradesh New";
+            Assert.AreEqual(actual, Expected);
+        }      
     }
 }
