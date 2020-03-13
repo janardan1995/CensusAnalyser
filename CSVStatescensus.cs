@@ -41,9 +41,8 @@ namespace CensusAnalyserLibrary
                         throw new CensusAnalyseException("INVALID_DELIMITER");
                 }
                 return Lines.Count;
-            }
-            else
-                throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
+            }            
+            throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
         }
     }
 }

@@ -9,7 +9,10 @@ namespace NUnitTestProject1
 {
     using System.IO;
     using NUnit.Framework;
+    using Newtonsoft.Json;
     using CensusAnalyserLibrary;
+    using Newtonsoft.Json.Linq;
+
 
     /// <summary>
     /// This is CensusAnalyser Test class
@@ -19,18 +22,18 @@ namespace NUnitTestProject1
         /// <summary>
         /// FOR USECASE 1
         /// </summary>
-        string CorrectFilePath_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CSV";
-        string FilePath_EmptyHeader_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeader.csv";
+        string CorrectFilePath_Usecase1 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV";
+        string FilePath_EmptyHeader_Usecase1 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusDataEmptyHeader.csv";
         string IncorrectFilePath_Usecase1 = @"Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv";
-        string ErrorTypeFilePath_Usecase1 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.txt";
+        string ErrorTypeFilePath_Usecase1 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.txt";
 
         /// <summary>
         /// FOR USECASE 2
         /// </summary>
-        string CorrectFilePath_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.CSV";
-        string FilePath_EmptyHeader_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\emptyHeaderForStateCode.csv";
+        string CorrectFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.csv";
+        string FilePath_EmptyHeader_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodeEmptyHeader.csv";
         string IncorrectFilePath_Usecase2 = @"Users\Bridge Labz\Desktop\censusdata\StateCode.csv";
-        string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.txt";
+        string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.txt";
 
         /// <summary>
         /// creating instance of factory class
@@ -52,7 +55,10 @@ namespace NUnitTestProject1
             StateCensusAnalyser obj = new StateCensusAnalyser();
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
             var obj1 = delegateCSV(ff.createInstance("CSVStatescensus"), CorrectFilePath_Usecase1);
-            object[] myitems = obj.StateCensusCSVData();
+            //object[] myitems = obj.StateCensusCSVData();
+            //int item = (int)myitems.Length;
+
+            string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CSV");
             int item = (int)myitems.Length;
             Assert.AreEqual(item, obj1);
         }
@@ -174,6 +180,22 @@ namespace NUnitTestProject1
             var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), FilePath_EmptyHeader_Usecase2));           
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
             Assert.AreEqual(actual.Message, expected);
+        }
+
+        /// <summary>
+        /// UseCase 3
+        /// TestCase 3.1
+        /// Convert the csv file to json 
+        /// here json file should matched the sorted order start state in csv file
+        /// </summary>
+        [Test]
+        public void UseCase3_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
+        {
+            var json=StateCensusAnalyser.StateCensus();
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual=experiencesArrary[0]["State"].ToString();
+            var Expected = "Andhra Pradesh";
+            Assert.AreEqual(actual, Expected);
         }
     }
 }

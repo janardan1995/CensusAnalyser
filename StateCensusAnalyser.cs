@@ -8,21 +8,34 @@
 namespace CensusAnalyserLibrary
 {
     using System;
-    using System.IO;
+    using System.IO; 
 
     /// <summary>
     /// This is state census Analyser class
     /// </summary>
+    /// <summary>
+    /// this methods read the csv file and return as a array of strings
+    /// </summary>
+
     public class StateCensusAnalyser
     {
-        /// <summary>
-        /// this methods read the csv file and return as a array of strings
-        /// </summary>
-        /// <returns>This class returns string value</returns>
-        public string[] StateCensusCSVData()
+        public static string StateCensus()
         {
-            string[] lines = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.csv");
-            return lines;
+            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
+
+            for (int i = 0; i < line.Length; i++)
+            {
+                Console.WriteLine(line[i]);
+            }
+            Utility.Sorted(line);
+            var str = Utility.ConvertCsvFileToJsonObject(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusDataSortedForm.csv");
+            return str;
+            
+            
+            //File.WriteAllText(@"C:\Users\Bridge Labz\Desktop\censusdata\xx.json", str);
         }
+
     }
+
 }
+
