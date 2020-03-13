@@ -30,7 +30,7 @@ namespace NUnitTestProject1
         /// <summary>
         /// FOR USECASE 2
         /// </summary>
-        string CorrectFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.csv";
+        string CorrectFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv";
         string FilePath_EmptyHeader_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodeEmptyHeader.csv";
         string IncorrectFilePath_Usecase2 = @"Users\Bridge Labz\Desktop\censusdata\StateCode.csv";
         string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.txt";
@@ -125,7 +125,7 @@ namespace NUnitTestProject1
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
             object Iteratoritems = delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2);
-            string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCode.csv");
+            string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
             int item = (int)myitems.Length;
             Assert.AreEqual(item, Iteratoritems);
         }
@@ -229,6 +229,22 @@ namespace NUnitTestProject1
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Andhra Pradesh New";
             Assert.AreEqual(actual, Expected);
-        }      
+        }
+
+        /// <summary>
+        /// UseCase 4
+        /// TestCase 4.2
+        /// Convert the csv file to json 
+        /// here json file should matched the sorted order start state in csv file
+        /// </summary>
+        [Test]
+        public void UseCase4_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
+        {
+            var json = StateCensusAnalyser.StateCode();
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[36]["State"].ToString();
+            var Expected = "West Bengal";
+            Assert.AreEqual(actual, Expected);
+        }
     }
 }
