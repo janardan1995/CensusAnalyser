@@ -265,5 +265,20 @@ namespace NUnitTestProject1
             var Expected = "Uttar Pradesh";
             Assert.AreEqual(actual, Expected);
         }
+        
+        /// <summary>
+        /// UseCase 5
+        /// TestCase 5.2
+        /// sorted by less poputation state
+        /// </summary>
+        [Test]
+        public void UseCase5_CheckStateCensusData_LesspopulationState_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var Expected = "Sikkim";
+            Assert.AreEqual(actual, Expected);
+        }
     }
 }
