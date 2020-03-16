@@ -295,5 +295,20 @@ namespace NUnitTestProject1
             var Expected = "Bihar";
             Assert.AreEqual(actual, Expected);
         }
+        
+        /// <summary>
+        /// UseCase 6
+        /// TestCase 6.2
+        /// sorted by DensityPerSqKm
+        /// </summary>
+        [Test]
+        public void UseCase5_CheckStateCensusData_LessDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var Expected = "Arunachal Pradesh";
+            Assert.AreEqual(actual, Expected);
+        }
     }
 }
