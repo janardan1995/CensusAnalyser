@@ -164,7 +164,7 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '.'));            
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '/'));            
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual.Message, expected);
         }

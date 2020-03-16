@@ -74,5 +74,16 @@ namespace CensusAnalyserLibrary
             }
             return JsonConvert.SerializeObject(listObjResult);
         }
-    }    
+    }
+
+    /// <summary>
+    /// this is a class for stateCensus
+    /// </summary>
+    public class StateCensusClass
+    {
+        public string State { get; set; }
+        public int Population { get; set; }
+        public int AreaInSqKm { get; set; }
+        public int DensityPerSqKm { get; set; }
+    }
 }
