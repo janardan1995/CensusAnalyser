@@ -86,4 +86,15 @@ namespace CensusAnalyserLibrary
         public int AreaInSqKm { get; set; }
         public int DensityPerSqKm { get; set; }
     }
+    
+    /// <summary>
+    /// This is the StateCode Class
+    /// </summary>
+    public class StateCodeClass
+    {
+        public int SrNo { get; set; }
+        public string StateName { get; set; }
+        public int TIN { get; set; }
+        public string StateCode { get; set; }
+    }
 }
