@@ -226,7 +226,7 @@ namespace NUnitTestProject1
         {
             var json = StateCensusAnalyser.StateCode();
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[0]["State"].ToString();
+            var actual = experiencesArrary[0]["StateName"].ToString();
             var Expected = "Andhra Pradesh New";
             Assert.AreEqual(actual, Expected);
         }
@@ -242,7 +242,7 @@ namespace NUnitTestProject1
         {
             var json = StateCensusAnalyser.StateCode();
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[36]["State"].ToString();
+            var actual = experiencesArrary[36]["StateName"].ToString();
             var Expected = "West Bengal";
             Assert.AreEqual(actual, Expected);
         }

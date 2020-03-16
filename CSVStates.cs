@@ -31,13 +31,13 @@ namespace CensusAnalyserLibrary
 
             ////initialize a list
             List<string> Lines = File.ReadAllLines(FilePath).ToList();
-            if(Lines.Contains("SrNo,State,Name,TIN,StateCode,"))
+            if(Lines.Contains("SrNo,StateName,TIN,StateCode,"))
             {
                 foreach (var line in Lines)
                 {
                     ////For delimeter
                     string[] LineCount = line.Split(delimiter);
-                    if (LineCount.Length != 4 && LineCount.Length != 6)
+                    if (LineCount.Length != 4 && LineCount.Length != 5)
                         throw new CensusAnalyseException("INVALID_DELIMITER");
                 }
                 return Lines.Count;

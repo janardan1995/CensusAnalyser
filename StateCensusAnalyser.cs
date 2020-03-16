@@ -19,20 +19,27 @@ namespace CensusAnalyserLibrary
 
     public class StateCensusAnalyser
     {
+        /// <summary>
+        /// This method for StateCensus
+        /// </summary>
+        /// <returns></returns>
         public static string StateCensus()
         {
             string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
-            Utility.Sorted(line);
-            var str = Utility.ConvertCsvFileToJsonObject(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusDataSortedForm.csv");
+            var sorted= Utility.sort(line,0);
+            var str = Utility.ConvertCSVFileToJsonObject(sorted);
             return str;
         }
 
+        /// <summary>
+        /// This method is for srate code
+        /// </summary>
+        /// <returns></returns>
         public static string StateCode()
         {
             string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
-
-            var sortedData=Utility.sort(line);
-            var str = Utility.ConvertCsvFileToJsonObject(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodeSortedForm.csv");
+            var sortedData= Utility.sort(line, 3);
+            var str = Utility.ConvertCSVFileToJsonObject(sortedData);
             return str;
         }
     }
