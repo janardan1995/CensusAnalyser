@@ -23,10 +23,18 @@ namespace CensusAnalyserLibrary
         /// This method for StateCensus
         /// </summary>
         /// <returns></returns>
-        public static string StateCensus()
+        public static string StateCensusSortByState(int palceholder)
         {
             string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
-            var sorted= Utility.sort(line,0);
+            var sorted= Utility.sortAlphabatic(line, palceholder);
+            var str = Utility.ConvertCSVFileToJsonObject(sorted);
+            return str;
+        }
+
+        public static string StateCensusSortByIntegerValue(int palceholder)
+        {
+            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
+            var sorted= Utility.SortingInt(line, palceholder);
             var str = Utility.ConvertCSVFileToJsonObject(sorted);
             return str;
         }
@@ -35,10 +43,10 @@ namespace CensusAnalyserLibrary
         /// This method is for srate code
         /// </summary>
         /// <returns></returns>
-        public static string StateCode()
+        public static string StateCodeSortByStateCode(int palceholder)
         {
             string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
-            var sortedData= Utility.sort(line, 3);
+            var sortedData= Utility.sortAlphabatic(line, palceholder);
             var str = Utility.ConvertCSVFileToJsonObject(sortedData);
             return str;
         }

@@ -20,7 +20,7 @@ namespace CensusAnalyserLibrary
         /// Sort Algorithm 
         /// </summary>
         /// <param name="line"></param>    
-        public static string[] sort(string[] line, int placeHolder)
+        public static string[] sortAlphabatic(string[] line, int placeHolder)
         {
 
             /// <summary>
@@ -74,6 +74,38 @@ namespace CensusAnalyserLibrary
             }
             return JsonConvert.SerializeObject(listObjResult);
         }
+
+        /// <summary>
+        /// Sort Algorithm 
+        /// </summary>
+        /// <param name="line"></param>    
+        public static string[] SortingInt(string[] line, int placeHolder)
+        {
+
+            /// <summary>
+            /// Sort Algorithm
+            /// </summary>
+            /// <param name="line"></param>
+
+            for (int i = 1; i < line.Length - 1; i++)
+            {
+                var min = i;
+                var Key1 = int.Parse(line[i].Split(',')[placeHolder]);
+                for (int j = i + 1; j < line.Length; j++)
+                {
+                    var key2 = int.Parse(line[j].Split(',')[placeHolder]);
+                    if (Key1<key2)
+                    {
+                        Key1 = key2;
+                        min = j;
+                    }
+                }
+                var temp = line[i];
+                line[i] = line[min];
+                line[min] = temp;
+            }
+            return line;
+        }
     }
 
     /// <summary>
@@ -96,5 +128,5 @@ namespace CensusAnalyserLibrary
         public string StateName { get; set; }
         public int TIN { get; set; }
         public string StateCode { get; set; }
-    }
+    }    
 }

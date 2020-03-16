@@ -35,6 +35,10 @@ namespace NUnitTestProject1
         string IncorrectFilePath_Usecase2 = @"Users\Bridge Labz\Desktop\censusdata\StateCode.csv";
         string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.txt";
 
+        int State=0;
+        int Population=1;
+        int AreaInSqKm=2;
+        int DensityPerSqKm=3;
         /// <summary>
         /// creating instance of factory class
         /// </summary>
@@ -191,7 +195,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.StateCensus();
+            var json=StateCensusAnalyser.StateCensusSortByState(State);
             JArray experiencesArrary = JArray.Parse(json);
             var actual=experiencesArrary[0]["State"].ToString();
             var Expected = "Andhra Pradesh";
@@ -207,9 +211,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.StateCensus();
+            var json=StateCensusAnalyser.StateCensusSortByState(State);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual=experiencesArrary[28]["State"].ToString();
+            var actual=experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
             var Expected = "West Bengal";
             Assert.AreEqual(actual, Expected);
         }
@@ -224,7 +228,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase4_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json = StateCensusAnalyser.StateCode();
+            var json = StateCensusAnalyser.StateCodeSortByStateCode(3);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["StateName"].ToString();
             var Expected = "Andhra Pradesh New";
@@ -240,10 +244,25 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase4_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json = StateCensusAnalyser.StateCode();
+            var json = StateCensusAnalyser.StateCodeSortByStateCode(3);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[36]["StateName"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count-1]["StateName"].ToString();
             var Expected = "West Bengal";
+            Assert.AreEqual(actual, Expected);
+        }
+
+        /// <summary>
+        /// UseCase 5
+        /// TestCase 5.1
+        /// sorted by MostPopulation
+        /// </summary>
+        [Test]
+        public void UseCase5_CheckStateCensusData_mostpopulationState_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[0]["State"].ToString();
+            var Expected = "Uttar Pradesh";
             Assert.AreEqual(actual, Expected);
         }
     }
