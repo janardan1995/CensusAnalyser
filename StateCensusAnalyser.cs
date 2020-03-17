@@ -40,7 +40,7 @@ namespace CensusAnalyserLibrary
         }
 
         /// <summary>
-        /// This method is for srate code
+        /// This method is for state code
         /// </summary>
         /// <returns></returns>
         public static string StateCodeSortByStateCode(int palceholder)

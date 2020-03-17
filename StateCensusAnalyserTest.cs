@@ -130,7 +130,7 @@ namespace NUnitTestProject1
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
             object Iteratoritems = delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2);
             string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
-            int item = (int)myitems.Length;
+            int item = (int)myitems.Length-1;
             Assert.AreEqual(item, Iteratoritems);
         }
 
@@ -168,7 +168,7 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '/'));            
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStates"), CorrectFilePath_Usecase2, '.'));            
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual.Message, expected);
         }

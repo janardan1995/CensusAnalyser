@@ -29,35 +29,48 @@ namespace CensusAnalyserLibrary
             if (!File.Exists(FilePath))
                 throw new CensusAnalyseException("ERROR_IN_FILE_READING");
 
-            string[] lines = File.ReadAllLines(FilePath);
 
-            if (lines.Contains("SrNo,StateName,TIN,StateCode"))
+            Dictionary<int, StateCodeClass> dict = new Dictionary<int, StateCodeClass>();
+
+            int k = 1;
+            using (StreamReader sr = new StreamReader(FilePath))
             {
-                foreach (var line in lines)
+                string s21 = sr.ReadLine();
+                int del = sr.ReadLine().Split(delimiter).Length;
+                if (s21 != "SrNo,StateName,TIN,StateCode")
                 {
-                    ////For delimeter
-                    string[] LineCount = line.Split(delimiter);
-                    if (LineCount.Length != 4 )
+                    throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
+                }
+                else if(del!=4){                   
                         throw new CensusAnalyseException("INVALID_DELIMITER");
                 }
-                Dictionary<int, StateCodeClass> keyValues = new Dictionary<int, StateCodeClass>();
-                int k = 0;
-                for (int i = 1; i < lines.Length; i++)
+
+                string s = "";
+                while ((s = sr.ReadLine()) != null)
                 {
-                    StateCodeClass sc = new StateCodeClass
+                    if (s != "State,Population,AreaInSqKm,DensityPerSqKm")
                     {
-                        SrNo = int.Parse(lines[i].Split(',')[0]),
-                        StateName = lines[i].Split(',')[1].ToString(),
-                        TIN = int.Parse(lines[i].Split(',')[2]),
-                        StateCode = lines[i].Split(',')[3].ToString(),
-                    };
-                    keyValues.Add(k, sc);
-                    k++;
+                        StateCodeClass sc = new StateCodeClass
+                        {
+                            SrNo = int.Parse(s.Split(',')[0]),
+                            StateName = s.Split(',')[1].ToString(),
+                            TIN = int.Parse(s.Split(',')[2]),
+                            StateCode = s.Split(',')[3].ToString(),
+                        };
+
+                        dict.Add(k, sc);
+                        k++;
+                    }
+
                 }
-                return lines.Length;               
-            }            
-           throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
+            }
+            return dict.Count+1;
         }
+
+
+
     }
 }
+
+
 
