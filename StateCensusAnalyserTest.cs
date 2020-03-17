@@ -287,7 +287,7 @@ namespace NUnitTestProject1
         /// sorted by DensityPerSqKm
         /// </summary>
         [Test]
-        public void UseCase5_CheckStateCensusData_MostDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
+        public void UseCase6_CheckStateCensusData_MostDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
             var json= StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
             JArray experiencesArrary = JArray.Parse(json);
@@ -302,12 +302,27 @@ namespace NUnitTestProject1
         /// sorted by DensityPerSqKm
         /// </summary>
         [Test]
-        public void UseCase5_CheckStateCensusData_LessDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
+        public void UseCase6_CheckStateCensusData_LessDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
             var json= StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
             var Expected = "Arunachal Pradesh";
+            Assert.AreEqual(actual, Expected);
+        }
+
+        /// <summary>
+        /// UseCase 7
+        /// TestCase 7.1
+        /// sorted by area of state
+        /// </summary>
+        [Test]
+        public void UseCase7_CheckStateCensusData_LargestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[0]["State"].ToString();
+            var Expected = "Rajasthan";
             Assert.AreEqual(actual, Expected);
         }
     }
