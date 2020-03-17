@@ -325,5 +325,20 @@ namespace NUnitTestProject1
             var Expected = "Rajasthan";
             Assert.AreEqual(actual, Expected);
         }
+        
+        /// <summary>
+        /// UseCase 7
+        /// TestCase 7.2
+        /// sorted by area of state
+        /// </summary>
+        [Test]
+        public void UseCase7_CheckStateCensusData_SmallestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var Expected = "Arunachal Pradesh";
+            Assert.AreEqual(actual, Expected);
+        }
     }
 }
