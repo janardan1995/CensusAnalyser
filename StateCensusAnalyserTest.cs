@@ -195,7 +195,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.StateCensusSortByState(State);
+            var json=StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
             JArray experiencesArrary = JArray.Parse(json);
             var actual=experiencesArrary[0]["State"].ToString();
             var Expected = "Andhra Pradesh";
@@ -211,7 +211,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.StateCensusSortByState(State);
+            var json=StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
             JArray experiencesArrary = JArray.Parse(json);
             var actual=experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
             var Expected = "West Bengal";
@@ -228,7 +228,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase4_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json = StateCensusAnalyser.StateCodeSortByStateCode(3);
+            var json = StateCensusAnalyser.SortStateAlphabatic(3, CorrectFilePath_Usecase2);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["StateName"].ToString();
             var Expected = "Andhra Pradesh New";
@@ -244,7 +244,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase4_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json = StateCensusAnalyser.StateCodeSortByStateCode(3);
+            var json = StateCensusAnalyser.SortStateAlphabatic(3, CorrectFilePath_Usecase2);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[experiencesArrary.Count-1]["StateName"].ToString();
             var Expected = "West Bengal";

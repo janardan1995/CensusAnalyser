@@ -20,34 +20,27 @@ namespace CensusAnalyserLibrary
     public class StateCensusAnalyser
     {
         /// <summary>
-        /// This method for StateCensus
+        /// sort by alphabate
         /// </summary>
         /// <returns></returns>
-        public static string StateCensusSortByState(int palceholder)
+        public static string SortStateAlphabatic(int palceholder, string path)
         {
-            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
-            var sorted= Utility.sortAlphabatic(line, palceholder);
-            var str = Utility.ConvertCSVFileToJsonObject(sorted);
-            return str;
-        }
-
-        public static string StateCensusSortByIntegerValue(int palceholder)
-        {
-            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
-            var sorted= Utility.SortingInt(line, palceholder);
-            var str = Utility.ConvertCSVFileToJsonObject(sorted);
+            string[] line = File.ReadAllLines(path);
+            var sortedData = Utility.sortAlphabatic(line, palceholder);
+            var str = Utility.ConvertCSVFileToJsonObject(sortedData);
             return str;
         }
 
         /// <summary>
-        /// This method is for state code
+        /// sort bt integer
         /// </summary>
+        /// <param name="palceholder"></param>
         /// <returns></returns>
-        public static string StateCodeSortByStateCode(int palceholder)
+        public static string StateCensusSortByIntegerValue(int palceholder)
         {
-            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
-            var sortedData= Utility.sortAlphabatic(line, palceholder);
-            var str = Utility.ConvertCSVFileToJsonObject(sortedData);
+            string[] line = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
+            var sorted = Utility.SortingInt(line, palceholder);
+            var str = Utility.ConvertCSVFileToJsonObject(sorted);
             return str;
         }
     }

@@ -36,7 +36,7 @@ namespace CensusAnalyserLibrary
             using (StreamReader sr = new StreamReader(FilePath))
             {
                 string s21 = sr.ReadLine();
-                int del = sr.ReadLine().Split(delimiter).Length;
+                int del = s21.Split(delimiter).Length;
                 if (s21 != "SrNo,StateName,TIN,StateCode")
                 {
                     throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
@@ -64,7 +64,7 @@ namespace CensusAnalyserLibrary
 
                 }
             }
-            return dict.Count+1;
+            return dict.Count;
         }
 
 
