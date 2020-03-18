@@ -22,7 +22,6 @@ namespace CensusAnalyserLibrary
         /// <param name="line"></param>    
         public static string[] sortAlphabatic(string[] line, int placeHolder)
         {
-
             /// <summary>
             /// Sort Algorithm
             /// </summary>
@@ -44,7 +43,7 @@ namespace CensusAnalyserLibrary
                 var temp = line[i];
                 line[i] = line[min];
                 line[min] = temp;
-             }
+            }
             return line;
         }
 
@@ -55,7 +54,7 @@ namespace CensusAnalyserLibrary
         /// <returns>it return JSON file</returns>        
         public static string ConvertCSVFileToJsonObject(string[] lines)
         {
-            var csv = new List<string[]>();        
+            var csv = new List<string[]>();
 
             foreach (string line in lines)
                 csv.Add(line.Split(','));
@@ -94,7 +93,7 @@ namespace CensusAnalyserLibrary
                 for (int j = i + 1; j < line.Length; j++)
                 {
                     var key2 = int.Parse(line[j].Split(',')[placeHolder]);
-                    if (Key1<key2)
+                    if (Key1 < key2)
                     {
                         Key1 = key2;
                         min = j;
@@ -118,7 +117,7 @@ namespace CensusAnalyserLibrary
         public int AreaInSqKm { get; set; }
         public int DensityPerSqKm { get; set; }
     }
-    
+
     /// <summary>
     /// This is the StateCode Class
     /// </summary>
@@ -128,5 +127,21 @@ namespace CensusAnalyserLibrary
         public string StateName { get; set; }
         public int TIN { get; set; }
         public string StateCode { get; set; }
-    }    
+    }
+
+    /// <summary>
+    /// CSV Us Data is reading from this class
+    /// </summary>
+    public class USCsvDataClass
+    {
+        public string StateId { get; set; }
+        public string State { get; set; }
+        public int Population { get; set; }
+        public int Housingunits { get; set; }
+        public double TotalArea { get; set; }
+        public double WaterArea { get; set; }
+        public double LandArea { get; set; }
+        public double PopulationDensity { get; set; }
+        public double HousingDensity { get; set; }
+    }
 }

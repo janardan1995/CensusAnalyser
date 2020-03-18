@@ -31,7 +31,7 @@ namespace CensusAnalyserLibrary
         {
             try
             {
-                int csv = statecensus.CSVDataUsingIEnumerator(FileName, delimiter);
+                int csv = statecensus.LoadIndiaCSVData(FileName, delimiter);
                 return csv;
             }
             catch (CensusAnalyseException e)

@@ -19,7 +19,7 @@ namespace CensusAnalyserLibrary
         /// In this method i am using Ienumerable
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public int CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
+        public int LoadIndiaCSVData(string FilePath, char delimiter = ',')
         {
             FileInfo fileInfo = new FileInfo(FilePath);
             string type = fileInfo.Extension;

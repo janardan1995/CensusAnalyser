@@ -17,10 +17,10 @@ namespace CensusAnalyserLibrary
     public class CSVStateANDCode : ICSVStatecensus
     {
         /// <summary>
-        /// In this method i am using Ienumerable
+        /// In this method load csv data for india
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public int CSVDataUsingIEnumerator(string FilePath, char delimiter = ',')
+        public int LoadIndiaCSVData(string FilePath, char delimiter = ',')
         {
             FileInfo fileInfo = new FileInfo(FilePath);
             string type = fileInfo.Extension;

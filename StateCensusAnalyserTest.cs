@@ -35,10 +35,10 @@ namespace NUnitTestProject1
         string IncorrectFilePath_Usecase2 = @"Users\Bridge Labz\Desktop\censusdata\StateCode.csv";
         string ErrorTypeFilePath_Usecase2 = @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCodecsv.txt";
 
-        int State=0;
-        int Population=1;
-        int AreaInSqKm=2;
-        int DensityPerSqKm=3;
+        int State = 0;
+        int Population = 1;
+        int AreaInSqKm = 2;
+        int DensityPerSqKm = 3;
         /// <summary>
         /// creating instance of factory class
         /// </summary>
@@ -58,12 +58,9 @@ namespace NUnitTestProject1
         {
             StateCensusAnalyser obj = new StateCensusAnalyser();
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var obj1 = delegateCSV(ff.createInstance("CSVStateANDCode"), CorrectFilePath_Usecase1);
-            //object[] myitems = obj.StateCensusCSVData();
-            //int item = (int)myitems.Length;
-
+            var obj1 = delegateCSV(ff.createInstance("CSVStateANDCode"), CorrectFilePath_Usecase1);            
             string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\Desktop\censusdata\StateCensusData.CSV");
-            int item = (int)myitems.Length-1;
+            int item = (int)myitems.Length - 1;
             Assert.AreEqual(item, obj1);
         }
 
@@ -75,7 +72,7 @@ namespace NUnitTestProject1
         public void UseCase1_GivenCSVFilePath_Imroper_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(()=>delegateCSV(ff.createInstance("CSVStateANDCode"), IncorrectFilePath_Usecase1));
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), IncorrectFilePath_Usecase1));
             var expected = MyEnum.ERROR_IN_FILE_READING.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -130,7 +127,7 @@ namespace NUnitTestProject1
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
             object Iteratoritems = delegateCSV(ff.createInstance("CSVStateANDCode"), CorrectFilePath_Usecase2);
             string[] myitems = File.ReadAllLines(@"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCode.csv");
-            int item = (int)myitems.Length-1;
+            int item = (int)myitems.Length - 1;
             Assert.AreEqual(item, Iteratoritems);
         }
 
@@ -155,7 +152,7 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_TypeIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), ErrorTypeFilePath_Usecase2));          
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), ErrorTypeFilePath_Usecase2));
             var expected = MyEnum.INCORRECT_TYPE.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -168,7 +165,7 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_DelimiterIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), CorrectFilePath_Usecase2, '.'));            
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), CorrectFilePath_Usecase2, '.'));
             var expected = MyEnum.INVALID_DELIMITER.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -181,7 +178,7 @@ namespace NUnitTestProject1
         public void UseCase2_GivenCSVFilePathCorrect_CSVHeaderIsIncorrect_whenAnalyse_ItThrowsException()
         {
             DelegateCSVDirector delegateCSV = bb.CSVDirector;
-            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), FilePath_EmptyHeader_Usecase2));           
+            var actual = Assert.Throws<CensusAnalyseException>(() => delegateCSV(ff.createInstance("CSVStateANDCode"), FilePath_EmptyHeader_Usecase2));
             var expected = MyEnum.HEADER_IS_NOT_FOUND.ToString();
             Assert.AreEqual(actual.Message, expected);
         }
@@ -195,9 +192,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckStartState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
+            var json = StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual=experiencesArrary[0]["State"].ToString();
+            var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Andhra Pradesh";
             Assert.AreEqual(actual, Expected);
         }
@@ -211,9 +208,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase3_CheckEndState_InAJsonFile_WhenAnalyse_ItShouldReturnMatched()
         {
-            var json=StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
+            var json = StateCensusAnalyser.SortStateAlphabatic(State, CorrectFilePath_Usecase1);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual=experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "West Bengal";
             Assert.AreEqual(actual, Expected);
         }
@@ -246,7 +243,7 @@ namespace NUnitTestProject1
         {
             var json = StateCensusAnalyser.SortStateAlphabatic(3, CorrectFilePath_Usecase2);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[experiencesArrary.Count-1]["StateName"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["StateName"].ToString();
             var Expected = "West Bengal";
             Assert.AreEqual(actual, Expected);
         }
@@ -259,13 +256,13 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase5_CheckStateCensusData_mostpopulationState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Uttar Pradesh";
             Assert.AreEqual(actual, Expected);
         }
-        
+
         /// <summary>
         /// UseCase 5
         /// TestCase 5.2
@@ -274,9 +271,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase5_CheckStateCensusData_LesspopulationState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Sikkim";
             Assert.AreEqual(actual, Expected);
         }
@@ -289,13 +286,13 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase6_CheckStateCensusData_MostDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Bihar";
             Assert.AreEqual(actual, Expected);
         }
-        
+
         /// <summary>
         /// UseCase 6
         /// TestCase 6.2
@@ -304,9 +301,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase6_CheckStateCensusData_LessDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Arunachal Pradesh";
             Assert.AreEqual(actual, Expected);
         }
@@ -319,13 +316,13 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase7_CheckStateCensusData_LargestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Rajasthan";
             Assert.AreEqual(actual, Expected);
         }
-        
+
         /// <summary>
         /// UseCase 7
         /// TestCase 7.2
@@ -334,9 +331,9 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase7_CheckStateCensusData_SmallestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json= StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
             JArray experiencesArrary = JArray.Parse(json);
-            var actual = experiencesArrary[experiencesArrary.Count-1]["State"].ToString();
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Arunachal Pradesh";
             Assert.AreEqual(actual, Expected);
         }
