@@ -24,11 +24,8 @@ namespace CensusAnalyserLibrary
         /// <returns>its return interface object</returns>
         public ICSVStatecensus createInstance(string className)
         {
-            if (className == "CSVStatescensus")            
-                xx = new CSVStatescensus();            
-            else if(className == "CSVStates")            
-                xx = new CSVStates();
-            
+            if (className == "CSVStateANDCode")            
+                xx = new CSVStateANDCode();          
             return xx;
         }
     }

@@ -12,7 +12,7 @@ namespace CensusAnalyserLibrary
     using System.Linq;
     /// <summary>
     /// This is CSVStateCensus class
-    /// </summary>
+    /// </summary>  
     public class CSVStatescensus : ICSVStatecensus
     {
         /// <summary>
@@ -29,7 +29,7 @@ namespace CensusAnalyserLibrary
             if (!File.Exists(FilePath))
                 throw new CensusAnalyseException("ERROR_IN_FILE_READING");
 
-            string[] lines = File.ReadAllLines(FilePath);         
+            string[] lines = File.ReadAllLines(FilePath);
 
             if (lines.Contains("State,Population,AreaInSqKm,DensityPerSqKm"))
             {
@@ -40,7 +40,7 @@ namespace CensusAnalyserLibrary
                     if (LineCount.Length != 4 && LineCount.Length != 2)
                         throw new CensusAnalyseException("INVALID_DELIMITER");
                 }
-                
+
                 Dictionary<int, StateCensusClass> keyValues = new Dictionary<int, StateCensusClass>();
                 int k = 0;
                 for (int i = 1; i < lines.Length; i++)
@@ -58,7 +58,7 @@ namespace CensusAnalyserLibrary
                     k++;
                 }
                 return lines.Length;
-            }            
+            }
             throw new CensusAnalyseException("HEADER_IS_NOT_FOUND");
         }
     }

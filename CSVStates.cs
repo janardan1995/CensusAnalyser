@@ -29,7 +29,6 @@ namespace CensusAnalyserLibrary
             if (!File.Exists(FilePath))
                 throw new CensusAnalyseException("ERROR_IN_FILE_READING");
 
-
             Dictionary<int, StateCodeClass> dict = new Dictionary<int, StateCodeClass>();
 
             int k = 1;
@@ -61,14 +60,10 @@ namespace CensusAnalyserLibrary
                         dict.Add(k, sc);
                         k++;
                     }
-
                 }
             }
             return dict.Count;
         }
-
-
-
     }
 }
 
