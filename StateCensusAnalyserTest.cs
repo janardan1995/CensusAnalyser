@@ -256,7 +256,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase5_CheckStateCensusData_mostpopulationState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Uttar Pradesh";
@@ -271,7 +271,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase5_CheckStateCensusData_LesspopulationState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(Population, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Sikkim";
@@ -286,7 +286,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase6_CheckStateCensusData_MostDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Bihar";
@@ -301,7 +301,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase6_CheckStateCensusData_LessDensityPerSqKmState_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(DensityPerSqKm, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Arunachal Pradesh";
@@ -316,7 +316,7 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase7_CheckStateCensusData_LargestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[0]["State"].ToString();
             var Expected = "Rajasthan";
@@ -331,10 +331,25 @@ namespace NUnitTestProject1
         [Test]
         public void UseCase7_CheckStateCensusData_SmallestStateByArea_WhenAnalyse_ItShouldReturnCorrect()
         {
-            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm);
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(AreaInSqKm, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\StateCensusData.CSV");
             JArray experiencesArrary = JArray.Parse(json);
             var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
             var Expected = "Arunachal Pradesh";
+            Assert.AreEqual(actual, Expected);
+        }
+
+        /// <summary>
+        /// UseCase 9
+        /// TestCase 9.1
+        /// Ability to report the US State Census Data in a Json Format from most populous state to the least one in US Format
+        /// </summary>
+        [Test]
+         public void UseCase9_CheckUSStateCensusData_MostPopulusState_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(2, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\USCensus.csv");
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[0]["State"].ToString();
+            var Expected = "California";
             Assert.AreEqual(actual, Expected);
         }
     }
