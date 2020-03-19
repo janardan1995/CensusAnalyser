@@ -15,17 +15,17 @@ namespace CensusAnalyserLibrary
         /// <summary>
         /// reference of interface class
         /// </summary>
-        ICSVStatecensus xx;
+        IAdapter xx;
 
         /// <summary>
         /// this is a method
         /// </summary>
         /// <param name="className">concrete class</param>
         /// <returns>its return interface object</returns>
-        public ICSVStatecensus createInstance(string className)
+        public IAdapter createInstance(string className)
         {
-            if (className == "CSVStateANDCode")            
-                xx = new CSVStateANDCode();          
+            if (className == "AdapterClass")            
+                xx = new AdapterClass();          
             return xx;
         }
     }

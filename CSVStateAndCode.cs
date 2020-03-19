@@ -20,7 +20,7 @@ namespace CensusAnalyserLibrary
         /// In this method load csv data for india
         /// </summary>
         /// <returns>it returns the string value</returns>
-        public int LoadIndiaCSVData(string FilePath, char delimiter = ',')
+        public virtual int LoadIndiaCSVData(string FilePath, char delimiter = ',')
         {
             FileInfo fileInfo = new FileInfo(FilePath);
             string type = fileInfo.Extension;

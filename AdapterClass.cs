@@ -2,10 +2,25 @@
 using System.Collections.Generic;
 using System;
 
+
 namespace CensusAnalyserLibrary
 {
-    public class USCensusCsv
+    public class AdapterClass  : CSVStateANDCode , IAdapter
     {
+
+        public int LoadIndiaData(string Path, char delimiter = ',')
+        {
+           int a= LoadIndiaCSVData(Path,delimiter);
+            return a;
+            
+        }
+        public int LoadUSData(string Path, char delimiter = ',')
+        {
+            int aa= LoadUSCsvData(Path, delimiter);
+            return aa;
+        }
+
+
         public int LoadUSCsvData(string path, char delimiter = ',')
         {
             FileInfo info = new FileInfo(path);
@@ -42,12 +57,12 @@ namespace CensusAnalyserLibrary
                         {
                             StateId = s.Split(',')[0],
                             State = s.Split(',')[1],
-                            Population = int.Parse(s.Split(',')[2]),                                                       
+                            Population = int.Parse(s.Split(',')[2]),
                             Housingunits = int.Parse(s.Split(',')[3]),
                             TotalArea = Double.Parse(s.Split(',')[4]),
-                            WaterArea= Double.Parse(s.Split(',')[5]),
-                            LandArea= Double.Parse(s.Split(',')[6]),
-                            PopulationDensity = Double.Parse(s.Split(',')[7]),                            
+                            WaterArea = Double.Parse(s.Split(',')[5]),
+                            LandArea = Double.Parse(s.Split(',')[6]),
+                            PopulationDensity = Double.Parse(s.Split(',')[7]),
                             HousingDensity = Double.Parse(s.Split(',')[8])
                         };
                         USDict.Add(k, us);
@@ -57,5 +72,6 @@ namespace CensusAnalyserLibrary
             }
             return USDict.Count;
         }
+
     }
 }

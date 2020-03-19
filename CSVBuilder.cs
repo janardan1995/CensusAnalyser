@@ -16,7 +16,7 @@ namespace CensusAnalyserLibrary
     /// <param name="FileName">our original file</param>
     /// <param name="delimiter">optional</param>
     /// <returns>its return object</returns>
-    public delegate int DelegateCSVDirector(ICSVStatecensus statecensus, String FileName, char delimiter = ',');
+    public delegate int DelegateCSVDirector(IAdapter statecensus, String FileName, char delimiter = ',');
 
     public class CSVBuilder
     {
@@ -27,11 +27,11 @@ namespace CensusAnalyserLibrary
         /// <param name="FileName">file path</param>
         /// <param name="delimiter">optional</param>
         /// <returns>returns object</returns>
-        public int CSVDirector(ICSVStatecensus statecensus, String FileName, char delimiter = ',')
+        public int CSVDirector(IAdapter statecensus, String FileName, char delimiter = ',')
         {
             try
             {
-                int csv = statecensus.LoadIndiaCSVData(FileName, delimiter);
+                int csv = statecensus.LoadIndiaData(FileName, delimiter);
                 return csv;
             }
             catch (CensusAnalyseException e)
