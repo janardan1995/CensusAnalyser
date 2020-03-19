@@ -352,5 +352,22 @@ namespace NUnitTestProject1
             var Expected = "California";
             Assert.AreEqual(actual, Expected);
         }
+
+        /// <summary>
+        /// UseCase 9
+        /// TestCase 9.2
+        /// Ability to report the US State Census Data in a Json Format from less populous state to the least one in US Format
+        /// </summary>
+        [Test]
+         public void UseCase9_CheckUSStateCensusData_LessPopulusState_WhenAnalyse_ItShouldReturnCorrect()
+        {
+            var json = StateCensusAnalyser.StateCensusSortByIntegerValue(2, @"C:\Users\Bridge Labz\source\repos\CensusAnalyserLibrary\USCensus.csv");
+            JArray experiencesArrary = JArray.Parse(json);
+            var actual = experiencesArrary[experiencesArrary.Count - 1]["State"].ToString();
+            var Expected = "Wyoming";
+            Assert.AreEqual(actual, Expected);
+        }
+
+
     }
 }
